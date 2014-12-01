@@ -35,4 +35,10 @@ class profiles::rabbitmq::server {
     ssl_key               => $defaults[ssl_key]
   }
 
+  rabbitmq_user { $defaults[default_user]:
+    ensure   => present,
+    admin    => true,`
+    password => $defaults[password],
+  }
+
 }
