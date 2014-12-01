@@ -37,7 +37,7 @@ class profiles::rabbitmq::server {
 
   rabbitmq_user { $defaults[default_user]:
     ensure   => present,
-    admin    => true,`
+    admin    => true,
     password => $defaults[password],
   }
 
