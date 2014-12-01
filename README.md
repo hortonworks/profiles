@@ -1,0 +1,4 @@
+profiles
+========
+
+Puppet profiles module
