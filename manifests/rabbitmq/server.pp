@@ -25,7 +25,6 @@ class profiles::rabbitmq::server {
     delete_guest_user     => $defaults[delete_guest_user],
     node_ip_address       => $defaults[node_ip_address],
     service_manage        => $defaults[service_manage],
-    port                  => $defaults[port],
     environment_variables => {
       'RABBITMQ_NODENAME'    => $defaults[RABBITMQ_NODENAME],
       'RABBITMQ_SERVICENAME' => $defaults[RABBITMQ_SERVICENAME]
