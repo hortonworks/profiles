@@ -20,16 +20,16 @@ class profiles::rabbitmq::server {
   $defaults = hiera(rabbitmq::defaults)
 
   class { '::rabbitmq':
-    stomp_ensure => $defaults[stomp_ensure],
-    default_user => $defaults[default_user],
-    delete_guest_user => $defaults[delete_guest_user],
-    node_ip_address   => $defaults[node_ip_address],
-    service_manage    => $defaults[service_manage],
-    port              => $defaults[port],
+    stomp_ensure          => $defaults[stomp_ensure],
+    default_user          => $defaults[default_user],
+    delete_guest_user     => $defaults[delete_guest_user],
+    node_ip_address       => $defaults[node_ip_address],
+    service_manage        => $defaults[service_manage],
+    port                  => $defaults[port],
     environment_variables => {
       'RABBITMQ_NODENAME'    => $defaults[RABBITMQ_NODENAME],
       'RABBITMQ_SERVICENAME' => $defaults[RABBITMQ_SERVICENAME]
-    }
+    },
     ssl                   => $defaults[ssl],
     ssl_cacert            => $defaults[ssl_cacert],
     ssl_cert              => $defaults[ssl_cert],
