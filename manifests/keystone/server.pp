@@ -27,19 +27,6 @@ class profiles::keystone::server {
     allowed_hosts => $settings[allowed_hosts],
   }
 
-  mysql_user { 'keystone_admin@localhost':
-    ensure   => 'present',
-    password => $settings[password],
-  }
-
-  mysql_grant { 'keystone_admin@localhost/keystone.*':
-    ensure     => 'present',
-    options    => ['GRANT'],
-    privileges => ['ALL'],
-    table      => '*.*',
-    user       => 'keystone_admin@localhost',
-  }
-  
   rabbitmq_user { 'keystone':
     ensure   => present,
     password => $settings[password],
