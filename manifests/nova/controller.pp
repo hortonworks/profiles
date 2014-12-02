@@ -14,6 +14,7 @@ class profiles::nova::controller {
 
   # Hiera lookups
   $settings = hiera('nova::settings')
+  $quota    = hiera('nova::quota')
   $password = $settings[password]
 
   package { 'rdo-release':
@@ -45,9 +46,14 @@ class profiles::nova::controller {
     verbose             => $settings[verbose],
   }
 
+  class { '::nova::keystone::auth':
+    password => $settings[password],
+    region   => $settings[region],
+    email    => $settings[email],
+  }
+
   include ::nova::conductor
   include ::nova::consoleauth
-  include ::nova::keystone::auth
   include ::nova::logging
   include ::nova::manage::floating
   include ::nova::network::neutron
@@ -55,5 +61,20 @@ class profiles::nova::controller {
   include ::nova::scheduler::filter
   include ::nova::utilities
   include ::nova::vncproxy
+
+  class { '::nova::quota':
+    quota_instances                       => $quota[quota_instances],
+    quota_cores                           => $quota[quota_cores],
+    quota_ram                             => $quota[quota_ram],
+    quota_volumes                         => $quota[quota_volumes],
+    quota_gigabytes                       => $quota[quota_gigabytes],
+    quota_floating_ips                    => $quota[quota_floating_ips],
+    quota_metadata_items                  => $quota[quota_metadata_items],
+    quota_max_injected_files              => $quota[quota_max_injected_files],
+    quota_max_injected_file_content_bytes => $quota[quota_max_injected_file_content_bytes],
+    quota_max_injected_file_path_bytes    => $quota[quota_max_injected_file_path_bytes],
+    quota_key_pairs                       => $quota[quota_key_pairs],
+    reservation_expire                    => $quota[reservation_expire],
+  }
 
 }
