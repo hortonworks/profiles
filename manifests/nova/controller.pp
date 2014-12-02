@@ -52,7 +52,7 @@ class profiles::nova::controller {
     rabbit_userid       => $settings[rabbit_userid],
     rabbit_password     => $password,
     rabbit_host         => $settings[rabbit_host],
-    virtual_host        => $settings[rabbit_vhost],
+    rabbit_virtual_host => $settings[rabbit_vhost],
     image_service       => $settings[image_service],
     glance_api_servers  => $settings[glance_api_servers],
     verbose             => $settings[verbose],

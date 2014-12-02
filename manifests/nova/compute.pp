@@ -44,7 +44,7 @@ class profiles::nova::compute {
     rabbit_host         => $compute_settings[controller_host],
     rabbit_userid       => $nova_settings[rabbit_userid],
     rabbit_password     => $password,
-    virtual_host        => $nova_settings[rabbit_vhost], 
+    rabbit_virtual_host => $nova_settings[rabbit_vhost], 
   }
   
   class { '::nova::compute':
