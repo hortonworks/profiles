@@ -19,17 +19,17 @@ class profiles::keystone::server {
   # Hiera lookups to grab keystone server settings
   $settings                 = hiera(keystone::settings)
   $keystone_service         = hiera(keystone::service)
-  $sql_password             = $settings[password]
+  $password                 = $settings[password]
 
   class { '::keystone::db::mysql':
     mysql_module  => $settings[mysql_module],
-    password      => $settings[password],
+    password      => $password,
     allowed_hosts => $settings[allowed_hosts],
   }
 
   rabbitmq_user { 'keystone':
     ensure   => present,
-    password => $settings[password],
+    password => $password,
     admin    => true,
   }
 
@@ -41,9 +41,15 @@ class profiles::keystone::server {
     verbose         => $settings[verbose],
     catalog_type    => $settings[catalog_type],
     admin_token     => $settings[admin_token],
-    sql_connection  => "mysql://keystone:${sql_password}@${settings[server]}/keystone",
+    sql_connection  => "mysql://keystone:${password}@${settings[server]}/keystone",
     rabbit_userid   => 'keystone',
-    rabbit_password => $settings[password],
+    rabbit_password => $password,
+  }
+
+  class { '::keystone::roles::admin':
+    email        => 'it@hortonworks.com',
+    password     => $password,
+    admin_tenant => $settings[admin_tenant],
   }
   
   class { '::keystone::endpoint':
