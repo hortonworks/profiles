@@ -48,11 +48,11 @@ class profiles::nova::controller {
     verbose             => $settings[verbose],
   }
 
-  class { '::nova::keystone::auth':
-    password => $settings[password],
-    region   => $settings[region],
-    email    => $settings[email],
-  }
+  #class { '::nova::keystone::auth':
+  #  password => $settings[password],
+  #  region   => $settings[region],
+  #  email    => $settings[email],
+  #}
 
   include ::nova::conductor
   include ::nova::consoleauth
