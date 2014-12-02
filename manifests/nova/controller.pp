@@ -30,7 +30,7 @@ class profiles::nova::controller {
   # Setup rabbit user for nova
   rabbitmq_user { 'nova':
     ensure   => present,
-    password => $settings[password],
+    password => $password,
     admin    => true,
   }
 
