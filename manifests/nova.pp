@@ -52,6 +52,7 @@ class profiles::nova {
   }
 
   class { '::nova':
+    mysql_module        => '3.0',
     database_connection => "mysql://nova:$settings[password]@127.0.0.1/nova?charset=utf8",
     rabbit_userid       => $settings[rabbit_userid],
     rabbit_password     => $settings[password],
