@@ -55,7 +55,6 @@ class profiles::nova::controller {
   include ::nova::conductor
   include ::nova::consoleauth
   include ::nova::logging
-  include ::nova::manage::floating
   include ::nova::network::neutron
   include ::nova::scheduler
   include ::nova::scheduler::filter
