@@ -19,6 +19,7 @@ class profiles::nova::controller {
   $password         = $settings[password]
   $neutron_password = $neutron[password]
 
+  # Make better later.  Make sure RDO repo is installed
   package { 'rdo-release':
     name     => 'rdo-release',
     ensure   => installed,
@@ -37,6 +38,7 @@ class profiles::nova::controller {
     ensure => present,
   }
 
+  # Install nova
   class { '::nova':
     mysql_module        => '3.0',
     database_connection => "mysql://nova:${password}@127.0.0.1/nova?charset=utf8",
@@ -48,26 +50,41 @@ class profiles::nova::controller {
     verbose             => $settings[verbose],
   }
 
-  #class { '::nova::keystone::auth':
-  #  password => $settings[password],
-  #  region   => $settings[region],
-  #  email    => $settings[email],
-  #}
+  # Nova Conductor
+  class { '::nova::conductor':
+    enabled => true,
+  }
 
-  include ::nova::conductor
-  include ::nova::consoleauth
+  # Console auth
+  class { '::nova::consoleauth':
+    enabled => true,
+  }
+
+  # Nova cli utilities
+  include ::nova::client
+
+  # Logging
   include ::nova::logging
 
+  # Neutron settings for nova.conf
   class { '::nova::network::neutron':
     neutron_admin_password => $neutron_password,
     neutron_region_name    => $neutron[neutron_region_name],
   }
 
-  include ::nova::scheduler
+  # Scheduler and filter
+  class { '::nova::scheduler':
+    enabled => true,
+  }
+  
   include ::nova::scheduler::filter
+
   include ::nova::utilities
+
+  # VNC
   include ::nova::vncproxy
 
+  # Quotas for the cluster
   class { '::nova::quota':
     quota_instances                       => $quota[quota_instances],
     quota_cores                           => $quota[quota_cores],
