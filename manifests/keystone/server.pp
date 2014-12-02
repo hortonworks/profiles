@@ -19,7 +19,7 @@ class profiles::keystone::server {
   # Hiera lookups to grab keystone server settings
   $settings                 = hiera(keystone::settings)
   $keystone_service         = hiera(keystone::service)
-  $sql_password             = $settings[password]
+  $sql_password             = hiera(keystone::settings::password)
 
   class { '::keystone::db::mysql':
     mysql_module  => $settings[mysql_module],
