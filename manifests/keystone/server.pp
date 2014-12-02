@@ -30,7 +30,7 @@ class profiles::keystone::server {
     verbose        => $settings[verbose],
     catalog_type   => $settings[catalog_type],
     admin_token    => $settings[admin_token],
-    sql_connection => $settings[sql_connection],
+    sql_connection => "mysql://keystone_admin:${settings[password]}@${settings[host]}/keystone",
   }
   
   class { 'keystone::roles::admin':
