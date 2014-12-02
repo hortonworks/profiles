@@ -34,7 +34,7 @@ class profiles::nova::controller {
     admin    => true,
   }
 
-  rabbitmq_user_permissions { 'nova':
+  rabbitmq_user_permissions { 'nova@*':
     configure_permission => '*',
     read_permission      => '*',
     write_permission     => '*',
