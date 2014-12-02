@@ -38,6 +38,13 @@ class profiles::nova::controller {
     ensure => present,
   }
 
+  # Install nova database
+  class { '::nova::db::mysql':
+    mysql_module  => '3.0',
+    password      => $password,
+    allowed_hosts => '%',
+  }
+
   # Install nova
   class { '::nova':
     mysql_module        => '3.0',
