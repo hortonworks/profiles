@@ -19,7 +19,6 @@ class profiles::keystone::server {
   # Hiera lookups to grab keystone server settings
   $settings                 = hiera(keystone::settings)
   $keystone_service         = hiera(keystone::service)
-  $keystone_tenant_settings = hiera(keystone::tenant::settings)
 
   class { '::keystone':
     verbose        => $settings[verbose],
