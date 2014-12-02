@@ -20,6 +20,13 @@
 #
 class profiles::nova::compute {
 
+  package { 'rdo-release':
+    name     => 'rdo-release',
+    ensure   => installed,
+    provider => yum,
+    source   => 'https://rdo.fedorapeople.org/rdo-release.rpm',
+  }
+
   # Hiera lookups
   $nova_settings            = hiera('nova::settings')
   $compute_settings         = hiera('nova::compute')
@@ -44,7 +51,6 @@ class profiles::nova::compute {
     virtio_nic         => $compute_settings[virtio_nic],
     neutron_enabled    => $compute_settings[neutron_enabled],
   }
-
 
   include ::nova::compute::libvirt
   include ::nova::compute::neutron
