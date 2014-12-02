@@ -41,6 +41,10 @@ class profiles::nova::compute {
     image_service       => $nova_settings[image_service],
     glance_api_servers  => $nova_settings[glance_api_servers],
     verbose             => $nova_settings[verbose],
+    rabbit_host         => $compute_settings[controller_host],
+    rabbit_userid       => $nova_settings[rabbit_userid],
+    rabbit_password     => $password,
+    
   }
   
   class { '::nova::compute':

@@ -50,7 +50,7 @@ class profiles::nova::controller {
     mysql_module        => '3.0',
     database_connection => "mysql://nova:${password}@127.0.0.1/nova?charset=utf8",
     rabbit_userid       => $settings[rabbit_userid],
-    rabbit_password     => $settings[password],
+    rabbit_password     => $password,
     rabbit_host         => $settings[rabbit_host],
     image_service       => $settings[image_service],
     glance_api_servers  => $settings[glance_api_servers],
