@@ -46,12 +46,6 @@ class profiles::keystone::server {
     rabbit_password => $password,
   }
 
-  class { '::keystone::roles::admin':
-    email        => 'it@hortonworks.com',
-    password     => $password,
-    admin_tenant => $settings[admin_tenant],
-  }
-  
   class { '::keystone::endpoint':
     public_address   => $keystone_service[public_address],
     admin_address    => $keystone_service[admin_address],
