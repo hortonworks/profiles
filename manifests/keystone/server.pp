@@ -21,6 +21,7 @@ class profiles::keystone::server {
   $keystone_service         = hiera(keystone::service)
 
   class { '::keystone::db::mysql':
+    mysql_module  => $settings[mysql_module],
     password      => $settings[password],
     allowed_hosts => $settings[allowed_hosts],
   }
