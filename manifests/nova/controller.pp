@@ -58,7 +58,7 @@ class profiles::nova::controller {
     verbose             => $settings[verbose],
   }
 
-  class { '::keystone::auth':
+  class { '::nova::keystone::auth':
     password => $password,
     region   => $settings[region],
     tenant   => $settings[tenant],
