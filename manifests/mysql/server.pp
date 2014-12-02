@@ -25,4 +25,9 @@ class profiles::mysql::server {
     restart         => $defaults[restart],
   }
 
+  class { '::mysql::bindings':
+    python_enable       => $defaults[python_enable],
+    python_package_name => $defaults[python_package_name],
+  }
+
 }
