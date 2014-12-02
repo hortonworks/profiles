@@ -23,7 +23,7 @@ class profiles::nova::compute {
   package { 'rdo-release':
     name     => 'rdo-release',
     ensure   => installed,
-    provider => yum,
+    provider => rpm,
     source   => 'https://rdo.fedorapeople.org/rdo-release.rpm',
   }
 
