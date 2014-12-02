@@ -58,11 +58,10 @@ class profiles::nova::controller {
     verbose             => $settings[verbose],
   }
 
-  class { '::nova::keystone::auth':
-    password  => $password,
-    auth_name => $settings[auth_name],
-    tenant    => $settings[tenant],
-    region    => $settings[region],
+  class { '::keystone::roles::admin':
+    email        => $settings[email],
+    password     => $password,
+    admin_tenant => $settings[admin_tenant],
   }
 
   # Nova API
