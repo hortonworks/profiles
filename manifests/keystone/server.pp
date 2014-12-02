@@ -16,26 +16,26 @@
 #
 class profiles::keystone::server {
 
-  # Hiera lookups to grab keystone server defaults
-  $defaults                 = hiera(keystone::defaults)
+  # Hiera lookups to grab keystone server settings
+  $settings                 = hiera(keystone::settings)
   $keystone_service         = hiera(keystone::service)
-  $keystone_tenant_defaults = hiera(keystone::tenant::defaults)
+  $keystone_tenant_settings = hiera(keystone::tenant::settings)
 
   class { '::keystone':
-    verbose        => $defaults[verbose],
-    catalog_type   => $defaults[catalog_type],
-    admin_token    => $defaults[admin_token],
-    sql_connection => $defaults[sql_connection],
+    verbose        => $settings[verbose],
+    catalog_type   => $settings[catalog_type],
+    admin_token    => $settings[admin_token],
+    sql_connection => $settings[sql_connection],
   }
   
   class { '::keystone::db::mysql':
-    password      => $defaults[password],
-    allowed_hosts => $defaults[allowed_hosts],
+    password      => $settings[password],
+    allowed_hosts => $settings[allowed_hosts],
   }
 
   class { 'keystone::roles::admin':
-    email    => $defaults[email],
-    password => $defaults[password],
+    email    => $settings[email],
+    password => $settings[password],
   }
 
   class { '::keystone::endpoint':
