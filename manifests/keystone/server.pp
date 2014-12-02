@@ -41,7 +41,7 @@ class profiles::keystone::server {
     verbose         => $settings[verbose],
     catalog_type    => $settings[catalog_type],
     admin_token     => $settings[admin_token],
-    sql_connection  => "mysql://keystone_admin:${sql_password}@${settings[server]}/keystone",
+    sql_connection  => "mysql://keystone:${sql_password}@${settings[server]}/keystone",
     rabbit_userid   => 'keystone',
     rabbit_password => $settings[password],
   }
