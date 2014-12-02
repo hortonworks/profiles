@@ -13,9 +13,11 @@
 class profiles::nova::controller {
 
   # Hiera lookups
-  $settings = hiera('nova::settings')
-  $quota    = hiera('nova::quota')
-  $password = $settings[password]
+  $settings         = hiera('nova::settings')
+  $quota            = hiera('nova::quota')
+  $neutron          = hiera('neutron::settings')
+  $password         = $settings[password]
+  $neutron_password = $neutron[password]
 
   package { 'rdo-release':
     name     => 'rdo-release',
@@ -55,7 +57,12 @@ class profiles::nova::controller {
   include ::nova::conductor
   include ::nova::consoleauth
   include ::nova::logging
-  include ::nova::network::neutron
+
+  class { '::nova::network::neutron':
+    neutron_admin_password => $neutron_password,
+    neutron_region_name    => $neutron[neutron_region_name],
+  }
+
   include ::nova::scheduler
   include ::nova::scheduler::filter
   include ::nova::utilities
