@@ -23,6 +23,9 @@ class profiles::nova::compute {
   $nova_settings            = hiera('nova::settings')
   $compute_settings = hiera('nova::compute')
 
+  # Include mysql client
+  include ::mysql::client
+
   class { '::nova':
     database_connection => "mysql://nova:$nova_settings[password]@127.0.0.1/nova?charset=utf8",
     image_service       => $nova_settings[image_service],
