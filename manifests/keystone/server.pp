@@ -45,4 +45,14 @@ class profiles::keystone::server {
     region           => $keystone_service[region],
   }
 
+  rabbitmq_user { ${settings}[rabbit_user]:
+    ensure   => present,
+    password => ${settings}[password],
+    admin    => true,
+  }
+
+  rabbitmq_vhost { ${settings}[rabbit_vhost]:
+    ensure => present,
+  }
+
 }
