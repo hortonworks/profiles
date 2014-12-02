@@ -34,12 +34,6 @@ class profiles::nova::controller {
     admin    => true,
   }
 
-  rabbitmq_user_permissions { 'nova@*':
-    configure_permission => '*',
-    read_permission      => '*',
-    write_permission     => '*',
-  }
-
   rabbitmq_vhost { $settings[rabbit_vhost]:
     ensure => present,
   }
@@ -58,6 +52,7 @@ class profiles::nova::controller {
     rabbit_userid       => $settings[rabbit_userid],
     rabbit_password     => $password,
     rabbit_host         => $settings[rabbit_host],
+    virtual_host        => $settings[rabbit_vhost],
     image_service       => $settings[image_service],
     glance_api_servers  => $settings[glance_api_servers],
     verbose             => $settings[verbose],
