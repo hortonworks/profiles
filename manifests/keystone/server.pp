@@ -20,6 +20,11 @@ class profiles::keystone::server {
   $settings                 = hiera(keystone::settings)
   $keystone_service         = hiera(keystone::service)
 
+  class { '::keystone::db::mysql':
+    password      => $settings[password],
+    allowed_hosts => $settings[allowed_hosts],
+  }
+
   class { '::keystone':
     verbose        => $settings[verbose],
     catalog_type   => $settings[catalog_type],
