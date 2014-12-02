@@ -29,6 +29,7 @@ class profiles::nova::compute {
   include ::mysql::client
 
   class { '::nova':
+    mysql_module        => '3.0',
     database_connection => "mysql://nova:${password}@127.0.0.1/nova?charset=utf8",
     image_service       => $nova_settings[image_service],
     glance_api_servers  => $nova_settings[glance_api_servers],
