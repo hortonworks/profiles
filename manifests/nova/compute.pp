@@ -5,9 +5,10 @@
 # === Variables
 #
 # The hiera lookups here should have an application_tier (parameter in foreman)
-# set to the cluster in question so that the corresponding compute_settings are pulled in
-# i.e. engr-us-1 or something like that.  Then a yaml file with all the variables
-# talked about here should exist within the hiera datadir defined in hiera.yaml
+# set to the cluster in question so that the corresponding compute_settings
+# are pulled in. i.e. engr-us-1 or something like that.
+# Then a yaml file with all the variables talked about here should
+# exist within the hiera datadir defined in hiera.yaml
 #
 # === Authors
 #
@@ -21,13 +22,14 @@ class profiles::nova::compute {
 
   # Hiera lookups
   $nova_settings            = hiera('nova::settings')
-  $compute_settings = hiera('nova::compute')
+  $compute_settings         = hiera('nova::compute')
+  $password                 = $nova_settings[password]
 
   # Include mysql client
   include ::mysql::client
 
   class { '::nova':
-    database_connection => "mysql://nova:$nova_settings[password]@127.0.0.1/nova?charset=utf8",
+    database_connection => "mysql://nova:${password}@127.0.0.1/nova?charset=utf8",
     image_service       => $nova_settings[image_service],
     glance_api_servers  => $nova_settings[glance_api_servers],
     verbose             => $nova_settings[verbose],
