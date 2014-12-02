@@ -27,6 +27,11 @@ class profiles::keystone::server {
     admin_token    => $defaults[admin_token],
     sql_connection => $defaults[sql_connection],
   }
+  
+  class { '::keystone::db::mysql':
+    password      => $defaults[password],
+    allowed_hosts => $defaults[allowed_hosts],
+  }
 
   class { 'keystone::roles::admin':
     email    => $defaults[email],
