@@ -45,10 +45,8 @@ class profiles::nova::compute {
     neutron_enabled    => $compute_settings[neutron_enabled],
   }
 
-  class { '::nova::compute::libvirt':
-    migration_support => true,
-  }
 
+  include ::nova::compute::libvirt
   include ::nova::compute::neutron
 
 }
