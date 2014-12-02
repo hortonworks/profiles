@@ -19,6 +19,7 @@ class profiles::keystone::server {
   # Hiera lookups to grab keystone server settings
   $settings                 = hiera(keystone::settings)
   $keystone_service         = hiera(keystone::service)
+  $sql_password             = hiera(keystone::settings::password)
 
   class { '::keystone::db::mysql':
     mysql_module  => $settings[mysql_module],
@@ -30,7 +31,7 @@ class profiles::keystone::server {
     verbose        => $settings[verbose],
     catalog_type   => $settings[catalog_type],
     admin_token    => $settings[admin_token],
-    sql_connection => "mysql://keystone_admin:${settings[password]}@${settings[host]}/keystone",
+    sql_connection => "mysql://keystone_admin:${sql_password}@${settings[host]}/keystone",
   }
   
   class { 'keystone::roles::admin':
