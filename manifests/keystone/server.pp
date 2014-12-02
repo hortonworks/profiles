@@ -27,6 +27,29 @@ class profiles::keystone::server {
     allowed_hosts => $settings[allowed_hosts],
   }
 
+  mysql_user { 'keystone_admin@localhost':
+    ensure   => 'present',
+    password => $settings[password],
+  }
+
+  mysql_grant { 'keystone_admin@localhost/keystone.*':
+    ensure     => 'present',
+    options    => ['GRANT'],
+    privileges => ['ALL'],
+    table      => '*.*',
+    user       => 'keystone_admin@localhost',
+  }
+  
+  rabbitmq_user { 'keystone':
+    ensure   => present,
+    password => $settings[password],
+    admin    => true,
+  }
+
+  rabbitmq_vhost { $settings[rabbit_vhost]:
+    ensure => present,
+  }
+
   class { '::keystone':
     verbose         => $settings[verbose],
     catalog_type    => $settings[catalog_type],
@@ -46,16 +69,6 @@ class profiles::keystone::server {
     admin_address    => $keystone_service[admin_address],
     internal_address => $keystone_service[internal_address],
     region           => $keystone_service[region],
-  }
-
-  rabbitmq_user { 'keystone':
-    ensure   => present,
-    password => $settings[password],
-    admin    => true,
-  }
-
-  rabbitmq_vhost { $settings[rabbit_vhost]:
-    ensure => present,
   }
 
 }
