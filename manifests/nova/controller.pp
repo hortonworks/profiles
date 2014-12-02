@@ -50,6 +50,12 @@ class profiles::nova::controller {
     verbose             => $settings[verbose],
   }
 
+  # Nova API
+  class { '::nova::api':
+    admin_password => $password,
+    enabled        => true,
+  }
+
   # Nova Conductor
   class { '::nova::conductor':
     enabled => true,
