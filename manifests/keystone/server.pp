@@ -31,7 +31,7 @@ class profiles::keystone::server {
     catalog_type    => $settings[catalog_type],
     admin_token     => $settings[admin_token],
     sql_connection  => "mysql://keystone_admin:${settings[password]}@${settings[server]}/keystone",
-    rabbit_userid   => $settings[rabbit_user],
+    rabbit_userid   => 'keystone',
     rabbit_password => $settings[password],
   }
   
@@ -47,7 +47,7 @@ class profiles::keystone::server {
     region           => $keystone_service[region],
   }
 
-  rabbitmq_user { $settings[rabbit_user]:
+  rabbitmq_user { 'keystone':
     ensure   => present,
     password => $settings[password],
     admin    => true,
