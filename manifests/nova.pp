@@ -52,7 +52,7 @@ class profiles::nova {
   }
 
   class { '::nova':
-    database_connection => "mysql://nova:$settings[password]@127.0.0.1/nova?charset=utf8',
+    database_connection => "mysql://nova:$settings[password]@127.0.0.1/nova?charset=utf8",
     rabbit_userid       => $settings[rabbit_userid],
     rabbit_password     => $settings[password],
     rabbit_host         => $settings[rabbit_host],
