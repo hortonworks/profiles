@@ -64,6 +64,7 @@ class profiles::openstack::nova::controller {
   class { '::nova::api':
     admin_password => $password,
     enabled        => true,
+    admin_tenant   => $settings[admin_tenant],
   }
 
   # Nova Conductor
