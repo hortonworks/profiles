@@ -62,7 +62,7 @@ class profiles::openstack::cinder::controller {
     keystone_auth_host => $settings[keystone_auth_host],
     keystone_auth_port => $settings[keystone_auth_port],
     enabled            => true,
-    admin_tenant_name  => $settings[admin_tenant],
+    keystone_tenant    => $settings[admin_tenant],
     bind_host          => $settings[bind_host],
   }
 
