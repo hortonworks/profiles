@@ -59,7 +59,7 @@ class profiles::openstack::glance {
 
   # Glance Registry
   class { '::glance::registry':
-    mysql_module      => '3.0'
+    mysql_module      => '3.0',
     verbose           => $settings[verbose],
     keystone_tenant   => $settings[keystone_tenant],
     keystone_user     => $settings[keystone_user],
