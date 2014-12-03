@@ -40,7 +40,7 @@ class profiles::openstack::cinder::controller {
   # Install cinder
   class { '::cinder':
     mysql_module        => '3.0',
-    database_connection => "mysql://cinder:${password}@${controller_host}/cinder?charset=utf8",
+    database_connection => "mysql://cinder:${password}@127.0.0.1/cinder?charset=utf8",
     rabbit_userid       => $settings[rabbit_userid],
     rabbit_password     => $password,
     rabbit_host         => $settings[rabbit_host],
