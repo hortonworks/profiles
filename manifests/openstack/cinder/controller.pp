@@ -75,7 +75,7 @@ class profiles::openstack::cinder::controller {
   include ::cinder::volume
 
   # Setup the local iscsi export from the local volume group
-  class { '::cinder::volume::iscsi':
+  cinder::backend::iscsi { 'default':
     iscsi_ip_address    => $settings[iscsi_ip_address],
     volume_backend_name => $settings[volume_backend_name],
     iscsi_helper        => $settings[iscsi_helper],

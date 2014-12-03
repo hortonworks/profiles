@@ -39,7 +39,7 @@ class profiles::openstack::cinder::storage {
 
   # Setup the local iscsi export from the local volume group
   # This requires there to be a cinder-volumes VG created already
-  class { '::cinder::volume::iscsi':
+  cinder::volume::iscsi { 'default':
     iscsi_ip_address    => $settings[iscsi_ip_address],
     volume_backend_name => $settings[volume_backend_name],
     iscsi_helper        => $settings[iscsi_helper],
