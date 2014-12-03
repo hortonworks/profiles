@@ -1,4 +1,4 @@
-# == Class: profiles::keystone::server
+# == Class: profiles::openstack::keystone::server
 #
 # Profile class for keystone server setup
 #
@@ -14,7 +14,7 @@
 #
 # Copyright 2014 Hortonworks, LLC
 #
-class profiles::keystone::server {
+class profiles::openstack::keystone::server {
 
   # Hiera lookups to grab keystone server settings
   $settings                 = hiera(keystone::settings)

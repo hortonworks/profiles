@@ -1,4 +1,4 @@
-# == Class: profiles::nova::compute
+# == Class: profiles::openstack::nova::compute
 #
 # Profile class for setting up nova compute
 #
@@ -18,7 +18,7 @@
 #
 # Copyright 2014 Hortonworks, Inc.
 #
-class profiles::nova::compute {
+class profiles::openstack::nova::compute {
 
   package { 'rdo-release':
     name     => 'rdo-release',

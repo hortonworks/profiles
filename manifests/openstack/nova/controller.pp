@@ -1,4 +1,4 @@
-# == Class: profiles::nova::controller
+# == Class: profiles::openstack::nova::controller
 #
 # Profile class for setting up an openstack controller
 #
@@ -10,7 +10,7 @@
 #
 # Copyright 2014 Hortonworks, Inc.
 #
-class profiles::nova::controller {
+class profiles::openstack::nova::controller {
 
   # Hiera lookups
   $settings         = hiera('nova::settings')
