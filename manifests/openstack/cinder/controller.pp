@@ -23,7 +23,7 @@ class profiles::openstack::cinder::controller {
     admin    => true,
   }
 
-  rabbitmq_user_permissions { 'cinder@.*':
+  rabbitmq_user_permissions { 'cinder@/':
     configure_permission => '.*',
     read_permission      => '.*',
     write_permission     => '.*',
