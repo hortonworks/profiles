@@ -15,6 +15,7 @@ class profiles::openstack::cinder::controller {
   # Hiera lookups
   $settings         = hiera('cinder::settings')
   $password         = $settings[password]
+  $controller_host  = $settings[controller_host]
 
   # Setup rabbit user for cinder
   rabbitmq_user { 'cinder':
@@ -39,7 +40,7 @@ class profiles::openstack::cinder::controller {
   # Install cinder
   class { '::cinder':
     mysql_module        => '3.0',
-    database_connection => "mysql://cinder:${password}@127.0.0.1/cinder?charset=utf8",
+    database_connection => "mysql://cinder:${password}@${controller_host}/cinder?charset=utf8",
     rabbit_userid       => $settings[rabbit_userid],
     rabbit_password     => $password,
     rabbit_host         => $settings[rabbit_host],
@@ -69,6 +70,16 @@ class profiles::openstack::cinder::controller {
   # Scheduler and filter
   class { '::cinder::scheduler':
     scheduler_driver => $settings[scheduler_driver],
+  }
+
+  include ::cinder::volume
+
+  # Setup the local iscsi export from the local volume group
+  class { '::cinder::volume::iscsi':
+    iscsi_ip_address    => $settings[iscsi_ip_address],
+    volume_backend_name => $settings[volume_backend_name],
+    iscsi_helper        => $settings[iscsi_helper],
+    volume_group        => $settings[volume_group],
   }
 
 }
