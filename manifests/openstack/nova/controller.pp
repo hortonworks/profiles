@@ -38,7 +38,7 @@ class profiles::openstack::nova::controller {
   class { '::nova::db::mysql':
     mysql_module  => '3.0',
     password      => $password,
-    allowed_hosts => '%',
+    allowed_hosts => ['%', 'localhost'],
   }
 
   # Install nova
