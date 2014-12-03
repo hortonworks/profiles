@@ -47,10 +47,11 @@ class profiles::openstack::cinder::controller {
     verbose             => $settings[verbose],
   }
 
-  class { '::nova::keystone::auth':
+  class { '::cinder::keystone::auth':
     password => $password,
     region   => $settings[region],
     tenant   => $settings[admin_tenant],
+    email    => $settings[email],
   }
 
   # Cinder API
