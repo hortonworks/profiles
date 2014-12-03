@@ -34,10 +34,6 @@ class profiles::nova::controller {
     admin    => true,
   }
 
-  rabbitmq_vhost { $settings[rabbit_vhost]:
-    ensure => present,
-  }
-
   # Install nova database
   class { '::nova::db::mysql':
     mysql_module  => '3.0',
