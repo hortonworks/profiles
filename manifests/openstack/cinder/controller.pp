@@ -15,7 +15,8 @@ class profiles::openstack::cinder::controller {
   # Hiera lookups
   $settings         = hiera('cinder::settings')
   $password         = $settings[password]
-  $controller_host  = $settings[controller_host]
+  $host             = $settings[controller_host]
+  $backend_name     = $settings[volume_backend_name]
 
   # Setup rabbit user for cinder
   rabbitmq_user { 'cinder':
@@ -75,7 +76,7 @@ class profiles::openstack::cinder::controller {
   include ::cinder::volume
 
   # Setup the local iscsi export from the local volume group
-  cinder::backend::iscsi { $settings[volume_backend_name]:
+  cinder::backend::iscsi { $backend_name:
     iscsi_ip_address    => $settings[iscsi_ip_address],
     volume_backend_name => $settings[volume_backend_name],
     iscsi_helper        => $settings[iscsi_helper],

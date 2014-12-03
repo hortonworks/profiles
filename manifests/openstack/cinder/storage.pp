@@ -16,12 +16,13 @@ class profiles::openstack::cinder::storage {
   # Hiera lookups
   $settings         = hiera('cinder::settings')
   $password         = $settings[password]
-  $controller_host  = $settings[controller_host]
+  $host             = $settings[controller_host]
+  $backend_name     = $settings[volume_backend_name]
 
   # Install cinder
   class { '::cinder':
     mysql_module        => '3.0',
-    database_connection => "mysql://cinder:${password}@${controller_host}/cinder?charset=utf8",
+    database_connection => "mysql://cinder:${password}@${host}/cinder?charset=utf8",
     rabbit_userid       => $settings[rabbit_userid],
     rabbit_password     => $password,
     rabbit_host         => $settings[rabbit_host],
@@ -39,7 +40,7 @@ class profiles::openstack::cinder::storage {
 
   # Setup the local iscsi export from the local volume group
   # This requires there to be a cinder-volumes VG created already
-  cinder::volume::iscsi { $settings[volume_backend_name]:
+  cinder::volume::iscsi { $backend_name:
     iscsi_ip_address    => $settings[iscsi_ip_address],
     volume_backend_name => $settings[volume_backend_name],
     iscsi_helper        => $settings[iscsi_helper],
