@@ -58,6 +58,7 @@ class profiles::openstack::nova::controller {
     password => $password,
     region   => $settings[region],
     tenant   => $settings[admin_tenant],
+    email    => $settings[email],
   }
 
   # Nova API
