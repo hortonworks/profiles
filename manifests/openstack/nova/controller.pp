@@ -34,6 +34,13 @@ class profiles::openstack::nova::controller {
     admin    => true,
   }
 
+  # Create permissions for rabbit user
+  rabbitmq_user_permissions { 'nova@/':
+    configure_permission => '.*',
+    read_permission      => '.*',
+    write_permission     => '.*',
+  }
+
   # Install nova database
   class { '::nova::db::mysql':
     mysql_module  => '3.0',
