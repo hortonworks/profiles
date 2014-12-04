@@ -67,7 +67,7 @@ class profiles::openstack::glance {
     sql_connection    => "mysql://glance:${password}@127.0.0.1/glance",
   }
 
-  class { '::glance::backend::cinder': }
+  class { '::glance::backend::file': }
   
   class { '::glance::notify::rabbitmq':
     rabbit_password => $password,
