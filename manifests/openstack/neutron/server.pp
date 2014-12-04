@@ -15,7 +15,7 @@ class profiles::openstack::neutron::server {
   # Hiera lookups
   $settings         = hiera('neutron::settings')
   $nova_settings    = hiera('nova::settings')
-  $nova_password    = $nova_settings[password],
+  $nova_password    = $nova_settings[password]
   $password         = $settings[password]
 
   # Setup rabbit user for Neutron
