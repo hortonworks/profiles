@@ -56,6 +56,7 @@ class profiles::openstack::neutron::server {
   }
 
   class { '::neutron::server':
+    mysql_module        => '3.0',
     auth_host           => $settings[auth_host],
     auth_password       => $password,
     database_connection => "mysql://neutron:${password}@127.0.0.1/neutron?charset=utf8",
