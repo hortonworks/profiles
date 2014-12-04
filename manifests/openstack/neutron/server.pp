@@ -14,6 +14,8 @@ class profiles::openstack::neutron::server {
 
   # Hiera lookups
   $settings         = hiera('neutron::settings')
+  $nova_settings    = hiera('nova::settings')
+  $nova_password    = $nova_settings[password],
   $password         = $settings[password]
 
   # Setup rabbit user for Neutron
@@ -67,6 +69,8 @@ class profiles::openstack::neutron::server {
     network_vlan_ranges => $settings[network_vlan_ranges],
   }
 
-  include ::neutron::server::notifications
+  class { 'neutron::server::notifications':
+    nova_admin_password => $nova_password,
+  }
 
 }
