@@ -125,4 +125,9 @@ class profiles::openstack::nova::controller {
     reservation_expire                    => $quota[reservation_expire],
   }
 
+  # Nova cert
+  class { '::nova::cert':
+    enabled => true,
+  }
+
 }
