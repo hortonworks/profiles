@@ -67,4 +67,6 @@ class profiles::openstack::neutron::server {
     network_vlan_ranges => $settings[network_vlan_ranges],
   }
 
+  include ::neutron::server::notifications
+
 }
