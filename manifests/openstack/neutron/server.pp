@@ -40,7 +40,6 @@ class profiles::openstack::neutron::server {
   # Install Neutron
   class { '::neutron':
     enabled             => true,
-    database_connection => "mysql://neutron:${password}@127.0.0.1/neutron?charset=utf8",
     rabbit_user         => $settings[rabbit_userid],
     rabbit_password     => $password,
     rabbit_host         => $settings[rabbit_host],
