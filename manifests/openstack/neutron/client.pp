@@ -29,13 +29,6 @@ class profiles::openstack::neutron::client {
     debug               => $settings[debug],
   }
 
-  class { '::neutron::keystone::auth':
-    password => $password,
-    region   => $settings[region],
-    tenant   => $settings[admin_tenant],
-    email    => $settings[email],
-  }
-
   include ::neutron::client
 
 }
