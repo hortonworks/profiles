@@ -64,6 +64,8 @@ class profiles::openstack::neutron::server {
     database_connection => "mysql://neutron:${password}@127.0.0.1/neutron?charset=utf8",
   }
 
+  include ::neutron::client
+
   class { 'neutron::plugins::ovs':
     tenant_network_type => $settings[tenant_network_type],
     network_vlan_ranges => $settings[network_vlan_ranges],
