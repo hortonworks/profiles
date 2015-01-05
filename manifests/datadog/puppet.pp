@@ -18,12 +18,7 @@ class profiles::datadog::puppet {
   # Make sure concat directory exists
   include ::profiles::install
 
-  # Install dogapi gem to enable support for Puppet reporting
-  package { 'dogapi':
-    provider => 'gem',
-    ensure   => 'latest',
-  }
-
+  # Setup datadog agent on the master to enable reporting
   class { 'datadog_agent':
     api_key            => $api_key,
     puppet_run_reports => true,
