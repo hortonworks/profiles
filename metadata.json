@@ -1,6 +1,6 @@
 {
   "name": "sbrimhall/profiles",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "author": "sbrimhall",
   "summary": "Mode containing Puppet profiles",
   "license": "Apache 2.0",
