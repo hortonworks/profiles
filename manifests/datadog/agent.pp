@@ -12,6 +12,11 @@
 #
 class profiles::datadog::agent {
 
-  include ::datadog_agent
+  # Hiera lookups
+  $api_key = hiera('datadog::api_key')
+
+  class { 'datadog_agent':
+    api_key => $api_key,
+  }
 
 }
