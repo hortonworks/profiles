@@ -13,5 +13,6 @@
 class profiles::datadog::agent {
 
   include ::datadog_agent
+  include ::datadog_agent::integrations::system
 
 }
