@@ -42,7 +42,7 @@ class profiles::openstack::controller {
 
   service { $services:
     ensure     => 'running',
-    enabled    => true,
+    enable     => true,
     hasrestart => true,
     hasstatus  => true,
   }
