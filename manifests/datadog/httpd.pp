@@ -19,8 +19,7 @@ class profiles::datadog::httpd {
 
   package { 'collectd-apache':
     ensure  => 'latest',
-    notify  => Service['httpd'],
-    require => Package['httpd']
+    notify  => Service['httpd']
   }
 
   file { 'mod_status':
