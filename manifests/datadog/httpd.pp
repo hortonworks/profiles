@@ -28,7 +28,6 @@ class profiles::datadog::httpd {
     owner  => 'root',
     group  => 'root',
     source => 'puppet:///modules/profiles/status.load',
-    require => Package['collectd-apache'],
     notify  => Service['httpd']
   }
 
