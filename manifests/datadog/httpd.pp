@@ -36,7 +36,6 @@ class profiles::datadog::httpd {
     owner  => 'root',
     group  => 'root',
     source => 'puppet:///modules/profiles/status.load',
-    notify  => Service['httpd']
   }
 
   include ::datadog_agent::integrations::apache
