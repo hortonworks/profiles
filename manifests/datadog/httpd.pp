@@ -19,7 +19,6 @@ class profiles::datadog::httpd {
 
   package { 'collectd-apache':
     ensure  => 'latest',
-    notify  => Service['httpd']
   }
 
   file { 'status_location':
