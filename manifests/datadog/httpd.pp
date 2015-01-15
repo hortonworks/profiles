@@ -22,6 +22,14 @@ class profiles::datadog::httpd {
     notify  => Service['httpd']
   }
 
+  file { 'status_location':
+    ensure => 'file',
+    path   => '/etc/httpd/conf.d/30-status.conf',
+    owner  => 'root',
+    group  => 'root',
+    source => 'puppet:///modules/profiles/30-status.conf'
+  }
+
   file { 'mod_status':
     ensure => 'file',
     path   => '/etc/httpd/conf.d/status.load',
